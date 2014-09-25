@@ -36,6 +36,19 @@ parse_plot $plot_input_before $before_graph
 #Hadoop Balancer command
 #hadoop balancer -threshold $thresh
 
+# Check if balancer ran sucessfully
+if [ $? -eq 0 ]
+then
+        endTime=$(date +"%x_%T")
+        echo -e " HDFS Balancer ran successfully ...... "
+	#Invoke parse_plot function to create graph after HDFS balancer runs
+	parse_plot $plot_input_after $after_graph
+
+else
+        endTime=$(date +"%x_%T")
+        echo -e " HDFS Balancer failed .... "
+fi
+
 #Invoke parse_plot function to create graph after HDFS balancer runs
 parse_plot $plot_input_after $after_graph
 
